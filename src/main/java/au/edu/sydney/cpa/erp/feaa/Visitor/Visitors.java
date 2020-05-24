@@ -1,0 +1,24 @@
+package au.edu.sydney.cpa.erp.feaa.Visitor;
+
+public class Visitors {
+    private GetTotalCommissionVisitor commissionVisitor = new CommissionVisitorImpl();
+    private CopyVisitor copyVisitor = new CopyVisitorImpl();
+    private LongDescVisitor longDescVisitor = new LongDescVisitorImpl();
+    private ShortDescVisitor shortDescVisitor = new ShortDescVisitorImpl();
+
+    public GetTotalCommissionVisitor getCommissionVisitor() {
+        return commissionVisitor;
+    }
+
+    public CopyVisitor getCopyVisitor() {
+        return copyVisitor;
+    }
+
+    public LongDescVisitor getLongDescVisitor() {
+        return longDescVisitor;
+    }
+
+    public ShortDescVisitor getShortDescVisitor() {
+        return shortDescVisitor;
+    }
+}

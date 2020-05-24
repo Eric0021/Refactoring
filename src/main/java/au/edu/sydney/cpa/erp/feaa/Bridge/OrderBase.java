@@ -1,7 +1,9 @@
 package au.edu.sydney.cpa.erp.feaa.Bridge;
 
 import au.edu.sydney.cpa.erp.feaa.Critical.Critical;
+import au.edu.sydney.cpa.erp.feaa.Visitor.CommissionVisitorImpl;
 import au.edu.sydney.cpa.erp.feaa.Visitor.GetTotalCommissionVisitor;
+import au.edu.sydney.cpa.erp.feaa.Visitor.Visitors;
 import au.edu.sydney.cpa.erp.ordering.Order;
 import au.edu.sydney.cpa.erp.ordering.Report;
 import au.edu.sydney.cpa.erp.ordering.ScheduledOrder;
@@ -19,7 +21,7 @@ public abstract class OrderBase implements Order {
     private boolean finalised = false;
     private Critical critical;
     private ScheduledOrder scheduled;
-    private GetTotalCommissionVisitor commissionVisitor;
+    protected final Visitors visitors = new Visitors();
 
     public OrderBase(int id, LocalDateTime date, int client, Critical critical, ScheduledOrder scheduled) {
         this.id = id;
@@ -61,11 +63,6 @@ public abstract class OrderBase implements Order {
     }
 
     @Override
-    public double getTotalCommission() {
-        return commissionVisitor.getTotalCommission(this, this.critical, this.scheduled);
-    }
-
-    @Override
     public void setReport(Report report, int employeeCount) {
         if (finalised) throw new IllegalStateException("Order was already finalised.");
 
@@ -87,6 +84,10 @@ public abstract class OrderBase implements Order {
         this.finalised = true;
     }
 
+    public boolean isFinalised() {
+        return finalised;
+    }
+
     @Override
     public int getClient() {
         return client;
@@ -101,16 +102,6 @@ public abstract class OrderBase implements Order {
         return null;
     }
 
-    @Override
-    public String shortDesc() {
-        return null;
-    }
-
-    @Override
-    public String longDesc() {
-        return null;
-    }
-
     public double getRecurringCost() {
         return scheduled.getRecurringCost();
     }
@@ -119,8 +110,8 @@ public abstract class OrderBase implements Order {
         return scheduled.getNumberOfQuarters();
     }
 
-    public GetTotalCommissionVisitor getCommissionVisitor() {
-        return commissionVisitor;
+    protected Visitors getVisitors() {
+        return visitors;
     }
 
     public Critical getCritical(){
@@ -131,8 +122,7 @@ public abstract class OrderBase implements Order {
         return this.scheduled;
     }
 
-    @Override
-    public Order copy() {
-        return null;
+    public Map<Report, Integer> getReports(){
+        return this.reports;
     }
 }

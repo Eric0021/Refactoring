@@ -16,4 +16,19 @@ public class SecondType extends OrderBase {
     public Order copy() {
         return null;
     }
+
+    @Override
+    public double getTotalCommission() {
+        return 0;
+    }
+
+    @Override
+    public String shortDesc() {
+        return null;
+    }
+
+    @Override
+    public String longDesc() {
+        return null;
+    }
 }
