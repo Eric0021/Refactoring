@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class OrderBase implements Order {
+public abstract class OrderBase implements Order {
     private Map<Report, Integer> reports = new HashMap<>();
     private final int id;
     private LocalDateTime date;
