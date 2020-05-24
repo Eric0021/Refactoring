@@ -34,11 +34,11 @@ public class FirstType extends OrderBase {
 
     @Override
     public String shortDesc() {
-        return visitors.getShortDescVisitor()
+        return visitors.getShortDescVisitor().shortDesc(this);
     }
 
     @Override
     public String longDesc() {
-        return null;
+        return visitors.getLongDescVisitor().longDesc(this);
     }
 }

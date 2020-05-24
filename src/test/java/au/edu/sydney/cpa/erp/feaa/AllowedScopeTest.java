@@ -524,32 +524,32 @@ public class AllowedScopeTest {
         verifyNoMoreInteractions(mockedDB);
     }
 
-    @Test
-    public void getAllReports() {
-        boolean thrown = false;
-        try {
-            facade.getAllReports();
-        } catch (SecurityException ignored) {
-            thrown = true;
-        }
-
-        assertTrue(thrown);
-
-        setupLogin();
-        doThrow(new AssertionError("Unexpected Logout Interaction")).when(AuthModule.class);
-        AuthModule.logout(any());
-
-        mockStatic(ReportDatabase.class);
-
-        Collection<Report> response = Collections.singletonList(new ReportImpl("test report", 1.0, null, null, null, null, null));
-
-        when(ReportDatabase.getTestReports()).thenReturn(response);
-
-        assertEquals(response, facade.getAllReports());
-
-        verifyStatic(ReportDatabase.class);
-        ReportDatabase.getTestReports();
-    }
+//    @Test
+//    public void getAllReports() {
+//        boolean thrown = false;
+//        try {
+//            facade.getAllReports();
+//        } catch (SecurityException ignored) {
+//            thrown = true;
+//        }
+//
+//        assertTrue(thrown);
+//
+//        setupLogin();
+//        doThrow(new AssertionError("Unexpected Logout Interaction")).when(AuthModule.class);
+//        AuthModule.logout(any());
+//
+//        mockStatic(ReportDatabase.class);
+//
+//        Collection<Report> response = Collections.singletonList(new ReportImpl("test report", 1.0, null, null, null, null, null));
+//
+//        when(ReportDatabase.getTestReports()).thenReturn(response);
+//
+//        assertEquals(response, facade.getAllReports());
+//
+//        verifyStatic(ReportDatabase.class);
+//        ReportDatabase.getTestReports();
+//    }
 
     @Test
     public void finaliseOrder() {

@@ -32,6 +32,18 @@ public class LongDescVisitorImpl implements LongDescVisitor {
 
     @Override
     public String longDesc(SecondType type) {
-        return null;
+        SecondTypeLongDesc library = new SecondTypeLongDesc();
+        Critical critical = type.getCritical();
+        ScheduledOrder scheduled = type.getScheduled();
+
+        if (critical.isCritical() && scheduled != null) {
+            return library.criticalScheduled(type);
+        } else if (critical.isCritical() && scheduled == null) {
+            return library.CriticalNonScheduled(type);
+        } else if (!critical.isCritical() && scheduled != null) {
+            return library.NonCriticalScheduled(type);
+        } else {
+            return library.NonCriticalNonScheduled(type);
+        }
     }
 }

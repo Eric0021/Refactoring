@@ -1,6 +1,6 @@
 package au.edu.sydney.cpa.erp.feaa.Visitor;
 
-import au.edu.sydney.cpa.erp.feaa.OrderType.FirstType;
+import au.edu.sydney.cpa.erp.feaa.OrderType.SecondType;
 import au.edu.sydney.cpa.erp.ordering.Report;
 
 import java.time.format.DateTimeFormatter;
@@ -9,9 +9,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-public class FirstTypeLongDesc {
-    public String criticalScheduled(FirstType type){
-        double maxCountedEmployees = type.getMaxCountedEmployees();
+public class SecondTypeLongDesc {
+    public String criticalScheduled(SecondType type){
         Map<Report, Integer> reports = type.getReports();
         double numQuarters = type.getNumberOfQuarters();
 
@@ -24,25 +23,17 @@ public class FirstTypeLongDesc {
         keyList.sort(Comparator.comparing(Report::getReportName).thenComparing(Report::getCommission));
 
         for (Report report : keyList) {
-            double subtotal = report.getCommission() * Math.min(maxCountedEmployees, reports.get(report));
+            double subtotal = report.getCommission() * reports.get(report);
             totalBaseCost += subtotal;
 
-            reportSB.append(String.format("\tReport name: %s\tEmployee Count: %d\tCommission per employee: $%,.2f\tSubtotal: $%,.2f",
+            reportSB.append(String.format("\tReport name: %s\tEmployee Count: %d\tCommission per employee: $%,.2f\tSubtotal: $%,.2f\n",
                     report.getReportName(),
                     reports.get(report),
                     report.getCommission(),
                     subtotal));
-
-            if (reports.get(report) > maxCountedEmployees) {
-                reportSB.append(" *CAPPED*\n");
-            } else {
-                reportSB.append("\n");
-            }
         }
 
-        int x = type.getOrderID();
-
-        String s = String.format(type.isFinalised() ? "" : "*NOT FINALISED*\n" +
+        return String.format(type.isFinalised() ? "" : "*NOT FINALISED*\n" +
                         "Order details (id #%d)\n" +
                         "Date: %s\n" +
                         "Number of quarters: %d\n" +
@@ -57,14 +48,13 @@ public class FirstTypeLongDesc {
                 reportSB.toString(),
                 totalLoadedCost - (totalBaseCost * numQuarters),
                 loadedCostPerQuarter,
-                totalLoadedCost);
-
-        return s;
+                totalLoadedCost
+        );
     }
 
-    public String CriticalNonScheduled(FirstType type){
-        double maxCountedEmployees = type.getMaxCountedEmployees();
+    public String CriticalNonScheduled(SecondType type){
         Map<Report, Integer> reports = type.getReports();
+
         double baseCommission = 0.0;
         double loadedCommission = type.getTotalCommission();
         StringBuilder reportSB = new StringBuilder();
@@ -73,20 +63,14 @@ public class FirstTypeLongDesc {
         keyList.sort(Comparator.comparing(Report::getReportName).thenComparing(Report::getCommission));
 
         for (Report report : keyList) {
-            double subtotal = report.getCommission() * Math.min(maxCountedEmployees, reports.get(report));
+            double subtotal = report.getCommission() * reports.get(report);
             baseCommission += subtotal;
 
-            reportSB.append(String.format("\tReport name: %s\tEmployee Count: %d\tCommission per employee: $%,.2f\tSubtotal: $%,.2f",
+            reportSB.append(String.format("\tReport name: %s\tEmployee Count: %d\tCommission per employee: $%,.2f\tSubtotal: $%,.2f\n",
                     report.getReportName(),
                     reports.get(report),
                     report.getCommission(),
                     subtotal));
-
-            if (reports.get(report) > maxCountedEmployees) {
-                reportSB.append(" *CAPPED*\n");
-            } else {
-                reportSB.append("\n");
-            }
         }
 
         return String.format(type.isFinalised() ? "" : "*NOT FINALISED*\n" +
@@ -104,30 +88,24 @@ public class FirstTypeLongDesc {
         );
     }
 
-    public String NonCriticalScheduled(FirstType type){
-        double maxCountedEmployees = type.getMaxCountedEmployees();
+    public String NonCriticalScheduled(SecondType type){
         Map<Report, Integer> reports = type.getReports();
         double numQuarters = type.getNumberOfQuarters();
+
+        double totalLoadedCost = type.getTotalCommission();
         StringBuilder reportSB = new StringBuilder();
 
         List<Report> keyList = new ArrayList<>(reports.keySet());
         keyList.sort(Comparator.comparing(Report::getReportName).thenComparing(Report::getCommission));
 
         for (Report report : keyList) {
-            double subtotal = report.getCommission() *
-                    Math.min(maxCountedEmployees, reports.get(report));
+            double subtotal = report.getCommission() * reports.get(report);
 
-            reportSB.append(String.format("\tReport name: %s\tEmployee Count: %d\tCommission per employee: $%,.2f\tSubtotal: $%,.2f",
+            reportSB.append(String.format("\tReport name: %s\tEmployee Count: %d\tCommission per employee: $%,.2f\tSubtotal: $%,.2f\n",
                     report.getReportName(),
                     reports.get(report),
                     report.getCommission(),
                     subtotal));
-
-            if (reports.get(report) > maxCountedEmployees) {
-                reportSB.append(" *CAPPED*\n");
-            } else {
-                reportSB.append("\n");
-            }
         }
 
         return String.format(type.isFinalised() ? "" : "*NOT FINALISED*\n" +
@@ -143,34 +121,26 @@ public class FirstTypeLongDesc {
                 numQuarters,
                 reportSB.toString(),
                 type.getTotalCommission() / numQuarters,
-                type.getTotalCommission()
-
+                totalLoadedCost
         );
     }
 
-    public String NonCriticalNonScheduled(FirstType type){
-        double maxCountedEmployees = type.getMaxCountedEmployees();
+    public String NonCriticalNonScheduled(SecondType type){
         Map<Report, Integer> reports = type.getReports();
-        double numQuarters = type.getNumberOfQuarters();
+
         StringBuilder reportSB = new StringBuilder();
 
         List<Report> keyList = new ArrayList<>(reports.keySet());
         keyList.sort(Comparator.comparing(Report::getReportName).thenComparing(Report::getCommission));
 
         for (Report report : keyList) {
-            double subtotal = report.getCommission() * Math.min(maxCountedEmployees, reports.get(report));
+            double subtotal = report.getCommission() * reports.get(report);
 
-            reportSB.append(String.format("\tReport name: %s\tEmployee Count: %d\tCommission per employee: $%,.2f\tSubtotal: $%,.2f",
+            reportSB.append(String.format("\tReport name: %s\tEmployee Count: %d\tCommission per employee: $%,.2f\tSubtotal: $%,.2f\n",
                     report.getReportName(),
                     reports.get(report),
                     report.getCommission(),
                     subtotal));
-
-            if (reports.get(report) > maxCountedEmployees) {
-                reportSB.append(" *CAPPED*\n");
-            } else {
-                reportSB.append("\n");
-            }
         }
 
         return String.format(type.isFinalised() ? "" : "*NOT FINALISED*\n" +
