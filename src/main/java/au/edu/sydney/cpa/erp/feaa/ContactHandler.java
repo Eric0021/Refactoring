@@ -1,17 +1,15 @@
 package au.edu.sydney.cpa.erp.feaa;
 
 import au.edu.sydney.cpa.erp.auth.AuthToken;
-import au.edu.sydney.cpa.erp.contact.*;
-import au.edu.sydney.cpa.erp.feaa.Strategy.*;
+import au.edu.sydney.cpa.erp.feaa.Chain.*;
 import au.edu.sydney.cpa.erp.ordering.Client;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class ContactHandler {
     public static boolean sendInvoice(AuthToken token, Client client, List<ContactMethod> priority, String data) {
-        List<ContactStrategy> strategies = Arrays.asList(
+        List<Chain> chain = Arrays.asList(
                 new SMSContact(),
                 new MailContact(),
                 new EmailContact(),
@@ -20,13 +18,18 @@ public class ContactHandler {
                 new CarrierPigeonContact()
         );
 
+        // sets the chain of responsibility
+        for(int i= 0; i<chain.size(); i++){
+            // don't set the last contact method's next chain
+            if(i == chain.size()-1){
+                continue;
+            }
+            chain.get(i).setNextChain(chain.get(i+1));
+        }
+
         for(ContactMethod method : priority){
-            for(ContactStrategy strategy : strategies){
-                if(strategy.isCorrectMethod(method)){
-                    if(strategy.sendInvoice(token, client, priority, data)){
-                        return true;
-                    }
-                }
+            if(chain.get(0).sendInvoice(token, client, method, data)){
+                return true;
             }
         }
         return false;
