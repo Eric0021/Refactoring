@@ -13,7 +13,7 @@ public class FirstTypeLongDesc {
     public String criticalScheduled(FirstType type){
         double maxCountedEmployees = type.getMaxCountedEmployees();
         Map<Report, Integer> reports = type.getReports();
-        double numQuarters = type.getNumberOfQuarters();
+        int numQuarters = type.getNumberOfQuarters();
 
         double totalBaseCost = 0.0;
         double loadedCostPerQuarter = type.getTotalCommission() / numQuarters;
@@ -107,7 +107,7 @@ public class FirstTypeLongDesc {
     public String NonCriticalScheduled(FirstType type){
         double maxCountedEmployees = type.getMaxCountedEmployees();
         Map<Report, Integer> reports = type.getReports();
-        double numQuarters = type.getNumberOfQuarters();
+        int numQuarters = type.getNumberOfQuarters();
         StringBuilder reportSB = new StringBuilder();
 
         List<Report> keyList = new ArrayList<>(reports.keySet());
@@ -151,7 +151,6 @@ public class FirstTypeLongDesc {
     public String NonCriticalNonScheduled(FirstType type){
         double maxCountedEmployees = type.getMaxCountedEmployees();
         Map<Report, Integer> reports = type.getReports();
-        double numQuarters = type.getNumberOfQuarters();
         StringBuilder reportSB = new StringBuilder();
 
         List<Report> keyList = new ArrayList<>(reports.keySet());

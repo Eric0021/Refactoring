@@ -97,15 +97,6 @@ public abstract class OrderBase implements Order {
         return this.critical.getCriticalLoading();
     }
 
-    @Override
-    public String generateInvoiceData() {
-        return null;
-    }
-
-    public double getRecurringCost() {
-        return scheduled.getRecurringCost();
-    }
-
     public int getNumberOfQuarters() {
         return scheduled.getNumberOfQuarters();
     }

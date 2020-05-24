@@ -12,10 +12,11 @@ import java.util.Map;
 public class SecondTypeLongDesc {
     public String criticalScheduled(SecondType type){
         Map<Report, Integer> reports = type.getReports();
-        double numQuarters = type.getNumberOfQuarters();
+        int numQuarters = type.getNumberOfQuarters();
 
         double totalBaseCost = 0.0;
-        double loadedCostPerQuarter = type.getTotalCommission() / numQuarters;
+//        double loadedCostPerQuarter = type.getTotalCommission() / numQuarters;
+        double loadedCostPerQuarter = type.getTotalCommission();
         double totalLoadedCost = type.getTotalCommission();
         StringBuilder reportSB = new StringBuilder();
 
@@ -90,7 +91,7 @@ public class SecondTypeLongDesc {
 
     public String NonCriticalScheduled(SecondType type){
         Map<Report, Integer> reports = type.getReports();
-        double numQuarters = type.getNumberOfQuarters();
+        int numQuarters = type.getNumberOfQuarters();
 
         double totalLoadedCost = type.getTotalCommission();
         StringBuilder reportSB = new StringBuilder();

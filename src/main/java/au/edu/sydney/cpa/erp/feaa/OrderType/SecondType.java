@@ -14,21 +14,30 @@ public class SecondType extends OrderBase {
 
     @Override
     public Order copy() {
-        return null;
+        return visitors.getCopyVisitor().copy(this);
     }
 
     @Override
     public double getTotalCommission() {
-        return 0;
+        return visitors.getCommissionVisitor().getTotalCommission(this);
     }
 
     @Override
     public String shortDesc() {
-        return null;
+        return visitors.getShortDescVisitor().shortDesc(this);
     }
 
     @Override
     public String longDesc() {
-        return null;
+        return visitors.getLongDescVisitor().longDesc(this);
+    }
+
+    public double getRecurringCost() {
+        return visitors.getCommissionVisitor().getTotalCommission(this) / getNumberOfQuarters();
+    }
+
+    @Override
+    public String generateInvoiceData() {
+        return visitors.getGenerateInvoiceVisitor().generateInvoiceData(this);
     }
 }

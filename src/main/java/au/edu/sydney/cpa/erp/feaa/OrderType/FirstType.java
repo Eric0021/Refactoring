@@ -18,6 +18,10 @@ public class FirstType extends OrderBase {
         this.maxCountedEmployees = maxCountedEmployees;
     }
 
+    public int getMaxCountedEmployees() {
+        return maxCountedEmployees;
+    }
+
     @Override
     public Order copy() {
         return visitors.getCopyVisitor().copy(this);
@@ -28,10 +32,6 @@ public class FirstType extends OrderBase {
         return visitors.getCommissionVisitor().getTotalCommission(this);
     }
 
-    public int getMaxCountedEmployees() {
-        return maxCountedEmployees;
-    }
-
     @Override
     public String shortDesc() {
         return visitors.getShortDescVisitor().shortDesc(this);
@@ -40,5 +40,14 @@ public class FirstType extends OrderBase {
     @Override
     public String longDesc() {
         return visitors.getLongDescVisitor().longDesc(this);
+    }
+
+    public double getRecurringCost() {
+        return visitors.getCommissionVisitor().getTotalCommission(this) / getNumberOfQuarters();
+    }
+
+    @Override
+    public String generateInvoiceData() {
+        return visitors.getGenerateInvoiceVisitor().generateInvoiceData(this);
     }
 }

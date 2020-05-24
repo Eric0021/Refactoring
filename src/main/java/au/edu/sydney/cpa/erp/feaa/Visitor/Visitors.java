@@ -5,6 +5,7 @@ public class Visitors {
     private CopyVisitor copyVisitor = new CopyVisitorImpl();
     private LongDescVisitor longDescVisitor = new LongDescVisitorImpl();
     private ShortDescVisitor shortDescVisitor = new ShortDescVisitorImpl();
+    private GenerateInvoiceVisitor generateInvoiceVisitor = new GenerateInvoiceVisitorImpl();
 
     public GetTotalCommissionVisitor getCommissionVisitor() {
         return commissionVisitor;
@@ -20,5 +21,9 @@ public class Visitors {
 
     public ShortDescVisitor getShortDescVisitor() {
         return shortDescVisitor;
+    }
+
+    public GenerateInvoiceVisitor getGenerateInvoiceVisitor() {
+        return generateInvoiceVisitor;
     }
 }

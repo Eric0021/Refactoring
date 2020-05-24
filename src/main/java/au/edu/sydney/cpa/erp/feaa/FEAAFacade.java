@@ -3,15 +3,17 @@ package au.edu.sydney.cpa.erp.feaa;
 import au.edu.sydney.cpa.erp.auth.AuthModule;
 import au.edu.sydney.cpa.erp.auth.AuthToken;
 import au.edu.sydney.cpa.erp.database.TestDatabase;
+import au.edu.sydney.cpa.erp.feaa.Bridge.NonScheduledOrder;
 import au.edu.sydney.cpa.erp.feaa.Bridge.ScheduledOrderBase;
 import au.edu.sydney.cpa.erp.feaa.Critical.Critical;
 import au.edu.sydney.cpa.erp.feaa.Critical.CriticalOrder;
+import au.edu.sydney.cpa.erp.feaa.Critical.RegularOrder;
 import au.edu.sydney.cpa.erp.feaa.FlyWeight.ReportFactory;
 import au.edu.sydney.cpa.erp.feaa.OrderType.FirstType;
+import au.edu.sydney.cpa.erp.feaa.OrderType.SecondType;
 import au.edu.sydney.cpa.erp.ordering.Client;
 import au.edu.sydney.cpa.erp.ordering.Order;
 import au.edu.sydney.cpa.erp.ordering.Report;
-import au.edu.sydney.cpa.erp.feaa.ordering.*;
 import au.edu.sydney.cpa.erp.feaa.reports.ReportDatabase;
 
 import java.time.LocalDateTime;
@@ -68,29 +70,28 @@ public class FEAAFacade {
             if (1 == orderType) { // 1 is regular accounting
                 if (isCritical) {
                     order = new FirstType(id, date, clientID, new CriticalOrder(criticalLoading), new ScheduledOrderBase(numQuarters), maxCountedEmployees);
-                    order.getTotalCommission();
                 } else {
-                    order = new Order66Scheduled(id, clientID, date, maxCountedEmployees, numQuarters);
+                    order = new FirstType(id, date, clientID, new RegularOrder(), new ScheduledOrderBase(numQuarters), maxCountedEmployees);
                 }
             } else if (2 == orderType) { // 2 is audit
                 if (isCritical) {
-                    order = new CriticalAuditOrderScheduled(id, clientID, date, criticalLoading, numQuarters);
+                    order = new SecondType(id, date, clientID, new CriticalOrder(criticalLoading), new ScheduledOrderBase(numQuarters));
                 } else {
-                    order = new NewOrderImplScheduled(id, clientID, date, numQuarters);
+                    order = new SecondType(id, date, clientID, new RegularOrder(), new ScheduledOrderBase(numQuarters));
                 }
             } else {return null;}
         } else {
             if (1 == orderType) {
                 if (isCritical) {
-                    order = new FirstOrderType(id, clientID, date, criticalLoading, maxCountedEmployees);
+                    order = new FirstType(id, date, clientID, new CriticalOrder(criticalLoading), new NonScheduledOrder(), maxCountedEmployees);
                 } else {
-                    order = new Order66(id, clientID, date, maxCountedEmployees);
+                    order = new FirstType(id, date, clientID, new RegularOrder(), new NonScheduledOrder(), maxCountedEmployees);
                 }
             } else if (2 == orderType) {
                 if (isCritical) {
-                    order = new CriticalAuditOrder(id, clientID, date, criticalLoading);
+                    order = new SecondType(id, date, clientID, new CriticalOrder(criticalLoading), new NonScheduledOrder());
                 } else {
-                    order = new NewOrderImpl(id, clientID, date);
+                    order = new SecondType(id, date, clientID, new RegularOrder(), new NonScheduledOrder());
                 }
             } else {return null;}
         }
