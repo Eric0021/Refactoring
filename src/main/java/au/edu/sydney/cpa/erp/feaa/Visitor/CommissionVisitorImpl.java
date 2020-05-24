@@ -21,7 +21,7 @@ public class CommissionVisitorImpl implements GetTotalCommissionVisitor {
         Critical critical = type.getCritical();
         ScheduledOrder scheduled = type.getScheduled();
 
-        if (critical.isCritical() && scheduled != null) {
+        if (type.isCritical() && type.isScheduled()) {
             double cost = 0.0;
             for (Report report : reports.keySet()) {
                 cost += report.getCommission() * Math.min(maxCountedEmployees, reports.get(report));
@@ -29,7 +29,7 @@ public class CommissionVisitorImpl implements GetTotalCommissionVisitor {
 
             cost += cost * criticalLoading;
             return cost * numQuarters;
-        } else if (critical.isCritical() && scheduled == null) {
+        } else if (type.isCritical() && !type.isScheduled()) {
             double cost = 0.0;
             for (Report report : reports.keySet()) {
                 cost += report.getCommission() * Math.min(maxCountedEmployees, reports.get(report));
@@ -37,7 +37,7 @@ public class CommissionVisitorImpl implements GetTotalCommissionVisitor {
 
             cost += cost * criticalLoading;
             return cost;
-        } else if (!critical.isCritical() && scheduled != null) {
+        } else if (!type.isCritical() && type.isScheduled()) {
             double cost = 0.0;
             for (Report report : reports.keySet()) {
                 cost += report.getCommission() * Math.min(maxCountedEmployees, reports.get(report));
@@ -59,21 +59,21 @@ public class CommissionVisitorImpl implements GetTotalCommissionVisitor {
         Critical critical = type.getCritical();
         ScheduledOrder scheduled = type.getScheduled();
 
-        if (critical.isCritical() && scheduled != null) {
+        if (type.isCritical() && type.isScheduled()) {
             double cost = 0.0;
             for (Report report : reports.keySet()) {
                 cost += reports.get(report) * report.getCommission();
             }
             cost += cost * critical.getCriticalLoading();
             return cost * numQuarters;
-        } else if (critical.isCritical() && scheduled == null) {
+        } else if (type.isCritical() && !type.isScheduled()) {
             double cost = 0.0;
             for (Report report : reports.keySet()) {
                 cost += reports.get(report) * report.getCommission();
             }
             cost += cost * critical.getCriticalLoading();
             return cost;
-        } else if (!critical.isCritical() && scheduled != null) {
+        } else if (!type.isCritical() && type.isScheduled()) {
             double cost = 0.0;
             for (Report report : reports.keySet()) {
                 cost += reports.get(report) * report.getCommission();

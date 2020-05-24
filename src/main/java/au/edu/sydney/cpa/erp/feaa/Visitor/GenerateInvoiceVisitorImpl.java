@@ -18,14 +18,14 @@ public class GenerateInvoiceVisitorImpl implements GenerateInvoiceVisitor {
         Critical critical = type.getCritical();
         ScheduledOrder scheduled = type.getScheduled();
 
-        if (critical.isCritical() && scheduled != null) {
+        if (type.isCritical() && type.isScheduled()) {
             return String.format("Your priority business account will be charged: $%,.2f each quarter for %d quarters, with a total overall cost of: $%,.2f" +
                     "\nPlease see your internal accounting department for itemised details.", type.getRecurringCost(),
                     type.getNumberOfQuarters(), type.getTotalCommission());
-        } else if (critical.isCritical() && scheduled == null) {
+        } else if (type.isCritical() && !type.isScheduled()) {
             return String.format("Your priority business account has been charged: $%,.2f" +
                     "\nPlease see your internal accounting department for itemised details.", type.getTotalCommission());
-        } else if (!critical.isCritical() && scheduled != null) {
+        } else if (!type.isCritical() && type.isScheduled()) {
             StringBuilder sb = new StringBuilder();
 
             sb.append("Thank you for your Crimson Permanent Assurance accounting order!\n");
@@ -90,14 +90,14 @@ public class GenerateInvoiceVisitorImpl implements GenerateInvoiceVisitor {
         Critical critical = type.getCritical();
         ScheduledOrder scheduled = type.getScheduled();
 
-        if (critical.isCritical() && scheduled != null) {
+        if (type.isCritical() && type.isScheduled()) {
             return String.format("Your priority business account will be charged: $%,.2f each quarter for %d quarters, with a total overall cost of: $%,.2f" +
                     "\nPlease see your internal accounting department for itemised details.",
                     type.getRecurringCost(), type.getNumberOfQuarters(), type.getTotalCommission());
-        } else if (critical.isCritical() && scheduled == null) {
+        } else if (type.isCritical() && !type.isScheduled()) {
             return String.format("Your priority business account has been charged: $%,.2f" +
                     "\nPlease see your internal accounting department for itemised details.", type.getTotalCommission());
-        } else if (!critical.isCritical() && scheduled != null) {
+        } else if (!type.isCritical() && type.isScheduled()) {
             StringBuilder sb = new StringBuilder();
 
             sb.append("Thank you for your Crimson Permanent Assurance accounting order!\n");

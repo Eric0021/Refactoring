@@ -11,10 +11,12 @@ import au.edu.sydney.cpa.erp.ordering.ScheduledOrder;
 import java.util.Map;
 
 public class CopyVisitorImpl implements CopyVisitor {
+
+
     @Override
     public Order copy(FirstType type) {
         Order copy = new FirstType(type.getOrderID(), type.getOrderDate(), type.getClient(),
-                type.getCritical(), type.getScheduled(), type.getMaxCountedEmployees());
+                type.getCritical(), type.getScheduled(), type.getMaxCountedEmployees(), type.isCritical(), type.isScheduled());
 
         for (Report report : type.getReports().keySet()) {
             copy.setReport(report, type.getReports().get(report));
@@ -26,7 +28,7 @@ public class CopyVisitorImpl implements CopyVisitor {
     @Override
     public Order copy(SecondType type) {
         Order copy = new SecondType(type.getOrderID(), type.getOrderDate(), type.getClient(),
-                type.getCritical(), type.getScheduled());
+                type.getCritical(), type.getScheduled(), type.isCritical(), type.isScheduled());
 
         for (Report report : type.getReports().keySet()) {
             copy.setReport(report, type.getReports().get(report));

@@ -19,11 +19,11 @@ public class LongDescVisitorImpl implements LongDescVisitor {
         Critical critical = type.getCritical();
         ScheduledOrder scheduled = type.getScheduled();
 
-        if (critical.isCritical() && scheduled != null) {
+        if (type.isCritical() && type.isScheduled()) {
             return library.criticalScheduled(type);
-        } else if (critical.isCritical() && scheduled == null) {
+        } else if (type.isCritical() && !type.isScheduled()) {
             return library.CriticalNonScheduled(type);
-        } else if (!critical.isCritical() && scheduled != null) {
+        } else if (!type.isCritical() && type.isScheduled()) {
             return library.NonCriticalScheduled(type);
         } else {
             return library.NonCriticalNonScheduled(type);
@@ -36,11 +36,11 @@ public class LongDescVisitorImpl implements LongDescVisitor {
         Critical critical = type.getCritical();
         ScheduledOrder scheduled = type.getScheduled();
 
-        if (critical.isCritical() && scheduled != null) {
+        if (type.isCritical() && type.isScheduled()) {
             return library.criticalScheduled(type);
-        } else if (critical.isCritical() && scheduled == null) {
+        } else if (type.isCritical() && !type.isScheduled()) {
             return library.CriticalNonScheduled(type);
-        } else if (!critical.isCritical() && scheduled != null) {
+        } else if (!type.isCritical() && type.isScheduled()) {
             return library.NonCriticalScheduled(type);
         } else {
             return library.NonCriticalNonScheduled(type);

@@ -8,8 +8,8 @@ import au.edu.sydney.cpa.erp.ordering.ScheduledOrder;
 import java.time.LocalDateTime;
 
 public class SecondType extends OrderBase {
-    public SecondType(int id, LocalDateTime date, int client, Critical critical, ScheduledOrder scheduled) {
-        super(id, date, client, critical, scheduled);
+    public SecondType(int id, LocalDateTime date, int client, Critical critical, ScheduledOrder scheduled, boolean isCritical, boolean isScheduled) {
+        super(id, date, client, critical, scheduled, isCritical, isScheduled);
     }
 
     @Override

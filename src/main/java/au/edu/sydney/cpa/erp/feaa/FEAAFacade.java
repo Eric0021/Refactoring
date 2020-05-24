@@ -69,31 +69,43 @@ public class FEAAFacade {
         if (isScheduled) {
             if (1 == orderType) { // 1 is regular accounting
                 if (isCritical) {
-                    order = new FirstType(id, date, clientID, new CriticalOrder(criticalLoading), new ScheduledOrderBase(numQuarters), maxCountedEmployees);
+                    order = new FirstType(id, date, clientID, new CriticalOrder(criticalLoading),
+                            new ScheduledOrderBase(numQuarters), maxCountedEmployees, true, true);
                 } else {
-                    order = new FirstType(id, date, clientID, new RegularOrder(), new ScheduledOrderBase(numQuarters), maxCountedEmployees);
+                    order = new FirstType(id, date, clientID, new RegularOrder(),
+                            new ScheduledOrderBase(numQuarters), maxCountedEmployees, false, true);
                 }
             } else if (2 == orderType) { // 2 is audit
                 if (isCritical) {
-                    order = new SecondType(id, date, clientID, new CriticalOrder(criticalLoading), new ScheduledOrderBase(numQuarters));
+                    order = new SecondType(id, date, clientID, new CriticalOrder(criticalLoading),
+                            new ScheduledOrderBase(numQuarters), true, true);
                 } else {
-                    order = new SecondType(id, date, clientID, new RegularOrder(), new ScheduledOrderBase(numQuarters));
+                    order = new SecondType(id, date, clientID, new RegularOrder(),
+                            new ScheduledOrderBase(numQuarters), false, true);
                 }
-            } else {return null;}
+            } else {
+                return null;
+            }
         } else {
             if (1 == orderType) {
                 if (isCritical) {
-                    order = new FirstType(id, date, clientID, new CriticalOrder(criticalLoading), new NonScheduledOrder(), maxCountedEmployees);
+                    order = new FirstType(id, date, clientID, new CriticalOrder(criticalLoading),
+                            new NonScheduledOrder(), maxCountedEmployees, true, false);
                 } else {
-                    order = new FirstType(id, date, clientID, new RegularOrder(), new NonScheduledOrder(), maxCountedEmployees);
+                    order = new FirstType(id, date, clientID, new RegularOrder(),
+                            new NonScheduledOrder(), maxCountedEmployees, false, false);
                 }
             } else if (2 == orderType) {
                 if (isCritical) {
-                    order = new SecondType(id, date, clientID, new CriticalOrder(criticalLoading), new NonScheduledOrder());
+                    order = new SecondType(id, date, clientID, new CriticalOrder(criticalLoading),
+                            new NonScheduledOrder(), true, false);
                 } else {
-                    order = new SecondType(id, date, clientID, new RegularOrder(), new NonScheduledOrder());
+                    order = new SecondType(id, date, clientID, new RegularOrder(),
+                            new NonScheduledOrder(), false, false);
                 }
-            } else {return null;}
+            } else {
+                return null;
+            }
         }
 //
 //        if (isScheduled) {
@@ -161,7 +173,7 @@ public class FEAAFacade {
             throw new SecurityException();
         }
 
-        if(!ReportFactory.isInitialised()) {
+        if (!ReportFactory.isInitialised()) {
             ReportFactory.retrieveAllReports();
         }
 
@@ -188,7 +200,7 @@ public class FEAAFacade {
         List<ContactMethod> contactPriorityAsMethods = new ArrayList<>();
 
         if (null != contactPriority) {
-            for (String method: contactPriority) {
+            for (String method : contactPriority) {
                 switch (method.toLowerCase()) {
                     case "internal accounting":
                         contactPriorityAsMethods.add(ContactMethod.INTERNAL_ACCOUNTING);

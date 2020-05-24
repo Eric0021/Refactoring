@@ -16,7 +16,7 @@ public class SecondTypeLongDesc {
 
         double totalBaseCost = 0.0;
 //        double loadedCostPerQuarter = type.getTotalCommission() / numQuarters;
-        double loadedCostPerQuarter = type.getTotalCommission();
+        double loadedCostPerQuarter = type.getTotalCommission() / numQuarters;
         double totalLoadedCost = type.getTotalCommission();
         StringBuilder reportSB = new StringBuilder();
 

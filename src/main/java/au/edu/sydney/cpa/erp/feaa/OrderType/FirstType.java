@@ -13,8 +13,9 @@ public class FirstType extends OrderBase {
     private int maxCountedEmployees;
 
     public FirstType(int id, LocalDateTime date, int client,
-                     Critical critical, ScheduledOrder scheduled, int maxCountedEmployees) {
-        super(id, date, client, critical, scheduled);
+                     Critical critical, ScheduledOrder scheduled, int maxCountedEmployees,
+                     boolean isCritical, boolean isScheduled) {
+        super(id, date, client, critical, scheduled, isCritical, isScheduled);
         this.maxCountedEmployees = maxCountedEmployees;
     }
 

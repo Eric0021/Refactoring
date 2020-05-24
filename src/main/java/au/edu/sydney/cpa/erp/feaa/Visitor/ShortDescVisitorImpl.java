@@ -11,12 +11,12 @@ public class ShortDescVisitorImpl implements ShortDescVisitor{
         Critical critical = type.getCritical();
         ScheduledOrder scheduled = type.getScheduled();
 
-        if (critical.isCritical() && scheduled != null) {
+        if (type.isCritical() && type.isScheduled()) {
             return String.format("ID:%s $%,.2f per quarter, $%,.2f total",
                     type.getOrderID(), type.getRecurringCost(), type.getTotalCommission());
-        } else if (critical.isCritical() && scheduled == null) {
+        } else if (type.isCritical() && !type.isScheduled()) {
             return String.format("ID:%s $%,.2f", type.getOrderID(), type.getTotalCommission());
-        } else if (!critical.isCritical() && scheduled != null) {
+        } else if (!type.isCritical() && type.isScheduled()) {
             return String.format("ID:%s $%,.2f per quarter, $%,.2f total",
                     type.getOrderID(), type.getRecurringCost(), type.getTotalCommission());
         } else {
@@ -29,12 +29,12 @@ public class ShortDescVisitorImpl implements ShortDescVisitor{
         Critical critical = type.getCritical();
         ScheduledOrder scheduled = type.getScheduled();
 
-        if (critical.isCritical() && scheduled != null) {
+        if (type.isCritical() && type.isScheduled()) {
             return String.format("ID:%s $%,.2f per quarter, $%,.2f total",
                     type.getOrderID(), type.getRecurringCost(), type.getTotalCommission());
-        } else if (critical.isCritical() && scheduled == null) {
+        } else if (type.isCritical() && !type.isScheduled()) {
             return String.format("ID:%s $%,.2f", type.getOrderID(), type.getTotalCommission());
-        } else if (!critical.isCritical() && scheduled != null) {
+        } else if (!type.isCritical() && type.isScheduled()) {
             return String.format("ID:%s $%,.2f per quarter, $%,.2f total",
                     type.getOrderID(), type.getRecurringCost(), type.getTotalCommission());
         } else {

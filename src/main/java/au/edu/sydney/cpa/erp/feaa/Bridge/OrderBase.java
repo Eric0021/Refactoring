@@ -22,13 +22,17 @@ public abstract class OrderBase implements Order {
     private Critical critical;
     private ScheduledOrder scheduled;
     protected final Visitors visitors = new Visitors();
+    private final boolean isCritical;
+    private final boolean isScheduled;
 
-    public OrderBase(int id, LocalDateTime date, int client, Critical critical, ScheduledOrder scheduled) {
+    public OrderBase(int id, LocalDateTime date, int client, Critical critical, ScheduledOrder scheduled, boolean isCritical, boolean isScheduled) {
         this.id = id;
         this.date = date;
         this.client = client;
         this.critical = critical;
         this.scheduled = scheduled;
+        this.isCritical = isCritical;
+        this.isScheduled = isScheduled;
     }
 
     @Override
@@ -115,5 +119,13 @@ public abstract class OrderBase implements Order {
 
     public Map<Report, Integer> getReports(){
         return this.reports;
+    }
+
+    public boolean isCritical() {
+        return isCritical;
+    }
+
+    public boolean isScheduled() {
+        return isScheduled;
     }
 }

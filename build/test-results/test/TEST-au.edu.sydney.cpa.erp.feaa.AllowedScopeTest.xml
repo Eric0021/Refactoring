@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" tests="10" skipped="1" failures="0" errors="0" timestamp="2020-05-24T17:06:24" hostname="DESKTOP-3JBS0PB" time="52.152">
+<testsuite name="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" tests="21" skipped="0" failures="0" errors="0" timestamp="2020-05-24T17:27:48" hostname="DESKTOP-3JBS0PB" time="1.346">
   <properties/>
-  <testcase name="getAllClientIDs" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="1.217"/>
-  <testcase name="finaliseOrder" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.073"/>
-  <testcase name="createOrder" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.013"/>
-  <testcase name="logout" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.005"/>
-  <testcase name="getClient" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.02"/>
-  <testcase name="removeOrder" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.007"/>
-  <testcase name="getOrderTotalCost" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.004"/>
-  <testcase name="getAllOrders" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.004"/>
-  <testcase name="login" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.003"/>
-  <testcase name="testOrderCriticalAudit" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="50.8">
-    <skipped/>
-  </testcase>
+  <testcase name="testOrderStandardAuditSched" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="1.136"/>
+  <testcase name="testOrderStandardRegular" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.02"/>
+  <testcase name="testOrderStandardRegularSched" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.013"/>
+  <testcase name="getKnownContactMethods" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.009"/>
+  <testcase name="testOrderCriticalAuditSched" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.013"/>
+  <testcase name="testOrderStandardAudit" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.009"/>
+  <testcase name="testOrderCriticalRegularSched" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.009"/>
+  <testcase name="testOrderCriticalAudit" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.008"/>
+  <testcase name="testOrderCriticalRegular" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.008"/>
+  <testcase name="login" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.005"/>
+  <testcase name="getAllClientIDs" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.006"/>
+  <testcase name="createOrder" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.006"/>
+  <testcase name="getAllOrders" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.016"/>
+  <testcase name="logout" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.004"/>
+  <testcase name="removeOrder" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.006"/>
+  <testcase name="finaliseOrder" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.04"/>
+  <testcase name="getClient" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.013"/>
+  <testcase name="orderLineSet" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.008"/>
+  <testcase name="getOrderLongDesc" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.004"/>
+  <testcase name="getOrderTotalCost" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.003"/>
+  <testcase name="getOrderShortDesc" classname="au.edu.sydney.cpa.erp.feaa.AllowedScopeTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
